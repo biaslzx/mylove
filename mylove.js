@@ -5,8 +5,8 @@ canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
 const letters = Array(256).join(" ").split("");
-const text = "My Love";
-const fontSize = 14;
+const text = "Eu te amo";
+const fontSize = 20;
 const columns = canvas.width / fontSize;
 
 let drops = [];
@@ -27,26 +27,25 @@ function draw() {
 
     ctx.fillText(char, x, y);
 
-    // se a gota sair da tela ou aleatoriamente, reinicia
     if (y > canvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
-    drops[i]++;
+    drops[i]+= 0.5;
   }
+
 }
 
-setInterval(draw, 33);
+setInterval(draw, 60);
 
-// Explosão quando clica
 canvas.addEventListener("click", (e) => {
-  const particles = 50;
+  const particles = 3;
   for (let i = 0; i < particles; i++) {
     createExplosion(e.clientX, e.clientY);
   }
 });
 
 function createExplosion(x, y) {
-  let particleCount = 30;
+  let particleCount = 20;
   let particles = [];
 
   for (let i = 0; i < particleCount; i++) {
@@ -79,5 +78,5 @@ function createExplosion(x, y) {
     });
 
     if (particles.length <= 0) clearInterval(interval);
-  }, 30);
+  }, 10);
 }
